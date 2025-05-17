@@ -1,6 +1,7 @@
 <html>
   <head>
     <link rel="manifest" href="manifest.json" />
+    <link rel="stylesheet" href="styles.css" />
 
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -24,63 +25,17 @@
     <link rel="apple-touch-icon" sizes="512x512" href="cloud512x512.png" />
     <link rel="icon" sizes="800x800" href="cloud.svg" />
     <link rel="apple-touch-icon" sizes="800x800" href="cloud.svg" />
+    <script src="scripts.js"></script>
   </head>
 
   <body>
     <div id="app">
-      <h1>Weather App</h1>
-      <p>Check the weather in your city!</p>
-      <input type="text" id="city" placeholder="Enter city name" />
-      <button id="getWeather">Get Weather</button>
-      <div id="weatherResult"></div>
+      <nav>
+        <a onclick="loadPage('home')">Strona główna</a>
+        <a onclick="loadPage('search')">Szukaj</a>
+        <a onclick="loadPage('weather')">Pogoda</a>
+      </nav>
+      <div id="content">Ładowanie...</div>
     </div>
-
-    <script src="app.js"></script>
-    <script>
-      if ("serviceWorker" in navigator) {
-        window.addEventListener("load", function () {
-          navigator.serviceWorker.register("sw.js").then(
-            function (registration) {
-              console.log(
-                "Service Worker registered with scope:",
-                registration.scope
-              );
-            },
-            function (err) {
-              console.log("Service Worker registration failed:", err);
-            }
-          );
-        });
-      }
-    </script>
-    <script>
-      document
-        .getElementById("getWeather")
-        .addEventListener("click", function () {
-          const city = document.getElementById("city").value;
-          fetch(
-            `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=YOUR_API_KEY`
-          )
-            .then((response) => response.json())
-            .then((data) => {
-              if (data.cod === 200) {
-                document.getElementById("weatherResult").innerHTML = `
-                            <h2>${data.name}</h2>
-                            <p>Temperature: ${(data.main.temp - 273.15).toFixed(
-                              2
-                            )} °C</p>
-                            <p>Weather: ${data.weather[0].description}</p>
-                        `;
-              } else {
-                document.getElementById(
-                  "weatherResult"
-                ).innerHTML = `<p>${data.message}</p>`;
-              }
-            })
-            .catch((error) =>
-              console.error("Error fetching weather data:", error)
-            );
-        });
-    </script>
   </body>
 </html>
