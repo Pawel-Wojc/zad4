@@ -186,7 +186,7 @@ console.log("API_KEY: ", API_KEY);
 const getLocation = () => {
     const city = document.getElementById("searchCity").value;
     const countryCode = document.getElementById("searchCountry").value;
-    const API_LOCATION_URL = `http://api.openweathermap.org/geo/1.0/direct?q=${city},${countryCode}&limit=1&appid=${API_KEY}`;
+    const API_LOCATION_URL = `https://api.openweathermap.org/geo/1.0/direct?q=${city},${countryCode}&limit=1&appid=${API_KEY}`;
     return fetch(API_LOCATION_URL)
         .then((response) => {
             if (!response.ok) throw new Error("Location not found");
