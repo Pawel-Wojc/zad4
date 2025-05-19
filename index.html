@@ -1,41 +1,87 @@
 <html>
-  <head>
-    <link rel="manifest" href="manifest.json" />
-    <link rel="stylesheet" href="styles.css" />
+    <head>
+        <link rel="manifest" href="manifest.json" />
+        <link rel="stylesheet" href="styles.css" />
 
-    <meta name="mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="application-name" content="Weather App" />
-    <meta name="apple-mobile-web-app-title" content="Weather App" />
-    <meta name="theme-color" content="#476ce6" />
-    <meta name="msapplication-navbutton-color" content="#476ce6" />
-    <meta
-      name="apple-mobile-web-app-status-bar-style"
-      content="black-translucent"
-    />
-    <meta name="msapplication-starturl" content="/" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="application-name" content="Weather App" />
+        <meta name="apple-mobile-web-app-title" content="Weather App" />
+        <meta name="theme-color" content="#476ce6" />
+        <meta name="msapplication-navbutton-color" content="#476ce6" />
+        <meta
+            name="apple-mobile-web-app-status-bar-style"
+            content="black-translucent"
+        />
+        <meta name="msapplication-starturl" content="/" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+        />
 
-    <link rel="icon" sizes="192.x192" href="cloud192x192.png" />
-    <link rel="apple-touch-icon" sizes="192.x192" href="cloud192x192.png" />
-    <link rel="icon" sizes="512x512" href="cloud512x512.png" />
-    <link rel="apple-touch-icon" sizes="512x512" href="cloud512x512.png" />
-    <link rel="icon" sizes="800x800" href="cloud.svg" />
-    <link rel="apple-touch-icon" sizes="800x800" href="cloud.svg" />
-    <script src="scripts.js"></script>
-  </head>
+        <link rel="icon" sizes="192.x192" href="cloud192x192.png" />
+        <link rel="apple-touch-icon" sizes="192.x192" href="cloud192x192.png" />
+        <link rel="icon" sizes="512x512" href="cloud512x512.png" />
+        <link rel="apple-touch-icon" sizes="512x512" href="cloud512x512.png" />
+        <link rel="icon" sizes="800x800" href="cloud.svg" />
+        <link rel="apple-touch-icon" sizes="800x800" href="cloud.svg" />
+    </head>
 
-  <body>
-    <div id="app">
-      <nav>
-        <a onclick="loadPage('home')">Strona główna</a>
-        <a onclick="loadPage('search')">Szukaj</a>
-        <a onclick="loadPage('weather')">Pogoda</a>
-      </nav>
-      <div id="content">Ładowanie...</div>
-    </div>
-  </body>
+    <body>
+        <nav>
+            <a id="navHomeButton">Strona główna</a>
+            <a id="navSearchButton">Szukaj</a>
+            <a id="navWeatherButton">Pogoda</a>
+        </nav>
+
+        <div id="home-view">
+            <h2>Witamy na stronie głównej</h2>
+            <p>Hej. Witaj w aplikacji do wyświetlania pogody.</p>
+            <p>
+                Sekcja szukaj zawiera prosty formularz z historią twojego </br>
+                wyszukiwania zapisaną w IndexDB. Możesz dodać miasto i kod </br>
+                kraju, a następnie kliknąć przycisk dodaj. Wtedy miasto zostanie </br>
+                zapisane
+            </p>
+            <p>
+                W sekcji pogoda widzisz tą samą listę. Możesz kliknąć w miasto </br>i 
+                zobaczyć obecną pogodę dzięki OpenWeatherMap API - pamiętaj że </br>
+                do tego potrzebujesz aktywnego połączenia z internetem. </br>
+            </p>
+        </div>
+
+        <div id="search-view">
+            <h2>Wpisz dane a następnie dodaj miasto do listy</h2>
+            <div id="inputFields">
+                <input type="text" id="searchCity" placeholder="Wpisz miasto" />
+                <input
+                    type="text"
+                    id="searchCountry"
+                    placeholder="Wpisz kod kraju"
+                />
+            </div>
+            <p id="notFoundMessage">Nie znaleziono takiego miasta</p>
+            <button id="searchWeatherButton" onclick="searchWeather()">
+                Dodaj
+            </button>
+            <div id="searchHistory">
+                <h3>Historia wyszukiwania</h3>
+                <ul id="historyList"></ul>
+            </div>
+        </div>
+
+        <div id="weather-view">
+            <h2>Pogoda</h2>
+            <div id="weatherData">
+              <p>Wybierz miasto, aby zobaczyć prognozę pogody.</p>
+            </div>
+            <p id="notFoundMessageWeather">Nie znaleziono takiego miasta</p>
+            <div id="searchHistoryButtons">
+                <h3>Historia wyszukiwania</h3>
+                <ul id="historyListButtons"></ul>
+            </div>
+        </div>
+
+        <script src="scripts.js"></script>
+    </body>
 </html>
